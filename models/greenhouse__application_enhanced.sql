@@ -34,4 +34,7 @@ final as (
     left join interview_metrics using(application_id)
 )
 
-select * from final
+select 
+*
+, getdate()                                       as snapshot_datetime
+from final

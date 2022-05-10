@@ -58,4 +58,7 @@ final as (
         application on interview.application_id = application.application_id
 )
 
-select * from final
+select 
+*
+, getdate()                                       as snapshot_datetime
+from final

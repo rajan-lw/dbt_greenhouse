@@ -41,5 +41,7 @@ final as (
     from join_w_attributes
 )
 
-select *
+select
+*
+, getdate()                                       as snapshot_datetime
 from final

@@ -82,5 +82,7 @@ final as (
         on job.job_id = job_openings.job_id
 )
 
-select *
+select 
+*
+, getdate()                                       as snapshot_datetime
 from final 

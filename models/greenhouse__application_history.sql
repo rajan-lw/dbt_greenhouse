@@ -96,5 +96,7 @@ activities_in_stages as (
     {{ dbt_utils.group_by(count_eeoc_columns + count_office_columns + count_department_columns + 15 + 1) }}
 )
 
-select *
+select 
+*
+, getdate()                                       as snapshot_datetime
 from activities_in_stages
