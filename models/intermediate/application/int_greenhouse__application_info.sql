@@ -190,7 +190,7 @@ join_info as (
     left join source
         on application.source_id = source.source_id
     left join rejection_reason
-        on application.rejected_reason_id = rejection_reason.rejection_reason_type_id
+        on application.rejected_reason_id = rejection_reason.id
     left join offer
         on application.application_id = offer.application_id
     left join activity
