@@ -36,5 +36,6 @@ final as (
 
 select 
 *
-, getdate()                                       as snapshot_datetime
+, getdate()                                                             as snapshot_datetime
+, application_id||'-'||coalesce(job_requisition_id,'0')                 as id
 from final
