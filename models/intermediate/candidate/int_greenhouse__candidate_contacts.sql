@@ -20,11 +20,12 @@ emails as (
 
     select 
         candidate_id,
+        email as email2,
         {{ fivetran_utils.string_agg("'<' || email || '>'" , "', '") }} as email
 
     from {{ var('email_address') }}
 
-    group by 1
+    group by 1,2
 ),
 
 -- getting the last resume uploaded
@@ -80,6 +81,7 @@ join_candidate_info as (
         candidate.*,
         phones.phone as phone,
         emails.email as email,
+        emails.email2 as email_clean
         latest_resume.url as resume_url,
         latest_links.linkedin_url,
         latest_links.github_url
