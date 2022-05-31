@@ -81,7 +81,7 @@ join_candidate_info as (
         candidate.*,
         phones.phone as phone,
         emails.email as email,
-        emails.email2 as email2
+        emails.email2 as email2,
         latest_resume.url as resume_url,
         latest_links.linkedin_url,
         latest_links.github_url
