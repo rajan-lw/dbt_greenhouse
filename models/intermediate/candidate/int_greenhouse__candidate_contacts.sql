@@ -24,7 +24,7 @@ emails as (
 
     from {{ var('email_address') }}
 
-    group by 1,2
+    group by 1
 ),
 
 -- getting the last resume uploaded
