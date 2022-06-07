@@ -45,3 +45,4 @@ select
 *
 , getdate()                                       as snapshot_datetime
 from final
+where scorecard_attribute_key != 'c28d04da46557ba2adad5b1d95295a9a'

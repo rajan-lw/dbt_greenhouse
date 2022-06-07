@@ -98,5 +98,11 @@ activities_in_stages as (
 
 select 
 *
-, getdate()                                       as snapshot_datetime
+, getdate()                                      as snapshot_datetime
+, {{ dbt_utils.surrogate_key(
+[         'APPLICATION_ID'
+        , 'NEW_STAGE_ID'
+        , 'VALID_FROM'
+        , 'JOB_ID']
+                    ) }}                         as primary_key
 from activities_in_stages

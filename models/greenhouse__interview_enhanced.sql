@@ -60,5 +60,13 @@ final as (
 
 select 
 *
-, getdate()                                       as snapshot_datetime
+, getdate()                                         as snapshot_datetime
+, {{ dbt_utils.surrogate_key(
+    [    'APPLICATION_ID'
+      ,  'SCHEDULED_INTERVIEW_ID'
+      ,  'START_AT'
+      ,  'STATUS'
+      ,  'INTERVIEWER_USER_ID'
+      ,  'JOB_ID']
+                    ) }}                            as primary_key
 from final
