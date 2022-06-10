@@ -74,6 +74,39 @@ latest_links as (
     group by 1
 ),
 
+order_education as (
+
+  select 
+         candidate_id,degree,school_name,discipline,
+        case 
+            when degree is NULL then 0
+            when degree like 'Other' then 0
+            when degree like 'High School' then 1
+            when degree like 'Associate%' then 2
+            when degree like 'Bachelor%' then 3
+            when degree like 'Engineer%' then 3
+            when degree like 'Master%' then 4
+            when degree like '%Doctor%' then 5
+                end                             as highest_degree,
+            row_number() over(partition by candidate_id order by highest_degree desc) as degree_row_num,
+            rank() over (partition by candidate_id order by highest_degree desc) as degree_rank
+    from {{ var('education') }}
+),
+
+highest_education as (
+    select *
+    from order_education
+   where degree_rank = 1
+
+),
+
+latest_education as (
+
+    select *
+    from highest_education 
+    where degree_row_num = 1
+),
+
 join_candidate_info as (
 
     select 
@@ -82,7 +115,10 @@ join_candidate_info as (
         emails.email as email,
         latest_resume.url as resume_url,
         latest_links.linkedin_url,
-        latest_links.github_url
+        latest_links.github_url,
+        latest_education.school_name,
+        latest_education.degree as highest_degree,
+        latest_education.discipline
     
     from 
     candidate
@@ -94,6 +130,8 @@ join_candidate_info as (
         on candidate.candidate_id = latest_resume.candidate_id
     left join latest_links
         on candidate.candidate_id = latest_links.candidate_id
+    left join latest_education
+        on candidate.candidate_id = latest_education.candidate_id
 )
 
 select *

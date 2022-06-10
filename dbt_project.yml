@@ -11,6 +11,7 @@ vars:
     candidate: "{{ ref('stg_greenhouse__candidate') }}"
     candidate_tag: "{{ ref('stg_greenhouse__candidate_tag') }}"
     application_history: "{{ ref('stg_greenhouse__application_history') }}"
+    education: "{{ ref('stg_greenhouse__education') }}"
     eeoc: "{{ ref('stg_greenhouse__eeoc') }}"
     email_address: "{{ ref('stg_greenhouse__email_address') }}"
     hiring_team: "{{ ref('stg_greenhouse__hiring_team') }}"
