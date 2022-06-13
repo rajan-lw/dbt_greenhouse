@@ -37,5 +37,8 @@ final as (
 select 
 *
 , getdate()                                                             as snapshot_datetime
-, application_id||'-'||coalesce(job_requisition_id,'0')                 as id
+, {{ dbt_utils.surrogate_key(
+        [ 'application_id'
+        , 'job_requisition_id' ]
+                                ) }}                                    as primary_key
 from final
